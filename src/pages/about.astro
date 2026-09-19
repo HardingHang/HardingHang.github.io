@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArrowLink from '../components/ArrowLink.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title="About — Hang Haitian"
+  description="About Hang Haitian, a research and systems engineer."
+>
+  <header class="page-intro shell">
+    <p class="eyebrow">About</p>
+    <h1>在研究与工程之间，<br />建立可验证的连接。</h1>
+  </header>
+
+  <div class="about-grid shell">
+    <article class="prose">
+      <p class="about-lead">
+        我是 Hang Haitian，一名关注数据库、数据基础设施与 AI 系统的研究型工程师。
+        我喜欢把开放问题拆成明确的假设、实验协议和工程接口，再用可复现的结果校正判断。
+      </p>
+
+      <h2>工作方式</h2>
+      <p>
+        对我而言，调研不是资料堆积，复现也不只是跑通代码。一个可靠的结论需要说明问题边界、
+        证据来源、验证方法和仍然存在的不确定性。
+      </p>
+      <p>
+        这个网站用于整理项目、研究笔记和工程实践。内容会随着新的证据持续修订，
+        因此文章会同时记录发布时间和最后更新时间。
+      </p>
+
+      <h2>当前兴趣</h2>
+      <ul>
+        <li>数据库系统、Lakehouse 与元数据基础设施</li>
+        <li>大模型推理、缓存复用与 AI Systems</li>
+        <li>论文复现、实验设计与研究工程自动化</li>
+        <li>开放标准、开源项目评估与系统边界</li>
+      </ul>
+    </article>
+
+    <aside class="about-aside">
+      <p>项目代码、公开文档和最近活动可以在 GitHub 找到。</p>
+      <ArrowLink href={site.github} label="GitHub profile" external />
+      <div style="height: 1rem;"></div>
+      <ArrowLink href="/rss.xml" label="Subscribe via RSS" />
+    </aside>
+  </div>
+</BaseLayout>

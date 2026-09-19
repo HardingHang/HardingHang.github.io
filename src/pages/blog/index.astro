@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, readingTime } from '../../utils/content';
+
+const posts = (await getCollection('blog'))
+  .filter(({ data }) => !data.draft)
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+
+const categories = ['Systems', 'AI Systems', 'Research', 'Engineering'];
+---
+
+<BaseLayout
+  title="Blog — Hang Haitian"
+  description="Writing about database systems, data infrastructure, AI systems, experiments, and engineering practice."
+>
+  <header class="page-intro shell">
+    <p class="eyebrow">Writing & notes</p>
+    <h1>Blog</h1>
+    <p>关于数据库系统、数据基础设施、AI 系统、实验方法与工程实践的长期记录。</p>
+  </header>
+
+  <section class="section shell" style="padding-top: 0; border-top: 0;">
+    <div class="filter-row" aria-label="Article categories">
+      <span class="filter-chip">All</span>
+      {categories.map((category) => <span class="filter-chip">{category}</span>)}
+    </div>
+
+    <div class="writing-list">
+      {posts.map((post) => (
+        <a class="post-row" href={`/blog/${post.id}/`}>
+          <time class="post-date" datetime={post.data.publishedAt.toISOString()}>
+            {formatDate(post.data.publishedAt)}
+          </time>
+          <div>
+            <h3>{post.data.title}</h3>
+            <p>{post.data.description}</p>
+          </div>
+          <div class="post-info">
+            <span>{post.data.category}</span>
+            <span>{readingTime(post.body ?? '')} min</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,35 +1,63 @@
-# NexT
+# HardingHang.github.io
 
-> 精于心，简于形
+Hang Haitian 的个人主页与技术博客，使用 Astro 构建并通过 GitHub Pages 发布。
 
-NexT 是由 [Hexo NexT](https://github.com/iissnan/hexo-theme-next) 移植而来的 Jekyll 主题。<!--commit: f951075d9b739d26b42472431995fa68d08796aa-->
+## 本地开发
 
-<a href="http://simpleyyt.github.io/jekyll-theme-next/" target="_blank">在线预览 Preview</a> | <a href="http://simpleyyt.com" target="_blank">Yitao's Blog</a> | <a href="http://theme-next.simpleyyt.com" target="_blank">NexT 使用文档</a> |  [English Documentation](README.en.md)
+```bash
+npm install
+npm run dev
+```
 
-[![Join the chat at https://gitter.im/simpleyyt/jekyll-theme-next](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jekyll-theme-next/lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+常用检查：
 
-![NexT Schemes](http://iissnan.com/nexus/next/next-schemes.jpg)
+```bash
+npm run check
+npm run build
+npm run preview
+```
 
+## 内容维护
 
-## 浏览器支持 Browser support
+### 新增博客
 
-![Browser support](http://iissnan.com/nexus/next/browser-support.png)
+复制 `src/content/blog/_template.md`，使用英文文件名作为 URL，例如：
 
+```text
+src/content/blog/evaluating-open-source-catalogs.md
+```
 
-## 贡献 Contributing
+完成后把 frontmatter 中的 `draft` 改为 `false`。正式文章会自动进入：
 
-欢迎提交问题与需求，修复代码。
+- `/blog/` 列表；
+- 首页最近文章；
+- `/rss.xml`；
+- Sitemap。
 
+允许的分类定义在 `src/content.config.ts`：
 
-## 开发 Development
+- `Systems`
+- `AI Systems`
+- `Research`
+- `Engineering`
 
-NexT 主旨在于简洁优雅且易于使用，所以首先要尽量确保 NexT 的简洁易用性。
+### 新增项目
 
-NexT is built for easily use with elegant appearance. First things first, always keep things simple.
+在 `src/content/projects/` 新建 Markdown。项目元数据经过 schema 校验，
+内容使用普通 Markdown 编写。
 
+### 修改个人信息
 
-## 捐赠
+- 站点标题、GitHub 地址：`src/data/site.ts`
+- 首页介绍与关注方向：`src/pages/index.astro`
+- About：`src/pages/about.astro`
+- 全局配色与排版：`src/styles/global.css`
 
-支付宝捐赠链接还是要有的，万一真的有人捐呢。
+## GitHub Pages 发布
 
-![支付宝扫码捐赠](http://7lryc0.com1.z0.glb.clouddn.com/a6x049034plyvjm1rvn4h28%20%281%29.png)
+1. 仓库使用 `main` 或现有的 `master` 作为默认分支；
+2. 在 GitHub 打开 `Settings → Pages`；
+3. 将 Source 设置为 **GitHub Actions**；
+4. 推送到 `main` 或 `master` 后，`.github/workflows/deploy.yml` 会自动构建和发布。
+
+GitHub Free 用户需要将 Pages 源仓库设为 public。

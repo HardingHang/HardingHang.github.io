@@ -1,0 +1,122 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArrowLink from '../components/ArrowLink.astro';
+import { formatDate, readingTime } from '../utils/content';
+
+const projects = (await getCollection('projects'))
+  .filter(({ data }) => data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+const posts = (await getCollection('blog'))
+  .filter(({ data }) => !data.draft)
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+  .slice(0, 4);
+---
+
+<BaseLayout>
+  <section class="hero shell">
+    <div>
+      <p class="eyebrow">Research & Systems Engineer</p>
+      <h1>
+        Hang Haitian
+        <span>从问题出发，以证据抵达结论。</span>
+      </h1>
+    </div>
+    <div class="hero-copy">
+      <p>
+        关注数据库、数据基础设施与 AI 系统。我的工作连接研究、实验与工程实现，
+        也记录过程中值得复用的方法和判断。
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="/projects/">View projects</a>
+        <a class="button" href="/blog/">Read the blog</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell">
+    <div class="section-header">
+      <div>
+        <p class="section-kicker">01 / Selected work</p>
+        <h2>把复杂问题变成<br />可验证的工程结论</h2>
+      </div>
+      <ArrowLink href="/projects/" label="All projects" />
+    </div>
+
+    <div class="project-list">
+      {projects.map((project, index) => (
+        <a class="project-card" href={`/projects/${project.id}/`}>
+          <span class="project-number">{String(index + 1).padStart(2, '0')}</span>
+          <div class="project-main">
+            <h3>{project.data.title}</h3>
+            <p>{project.data.description}</p>
+          </div>
+          <div class="project-meta">
+            <span class="status">{project.data.status}</span>
+            <span>{project.data.eyebrow}</span>
+          </div>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 19 19 5M9 5h10v10"></path>
+          </svg>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section shell">
+    <div class="section-header">
+      <div>
+        <p class="section-kicker">02 / Latest writing</p>
+        <h2>研究笔记与工程实践</h2>
+        <p>记录问题的背景、方法、证据和边界，而不只记录最后的答案。</p>
+      </div>
+      <ArrowLink href="/blog/" label="All writing" />
+    </div>
+
+    <div class="writing-list">
+      {posts.map((post) => (
+        <a class="post-row" href={`/blog/${post.id}/`}>
+          <time class="post-date" datetime={post.data.publishedAt.toISOString()}>
+            {formatDate(post.data.publishedAt, { year: undefined })}
+          </time>
+          <div>
+            <h3>{post.data.title}</h3>
+            <p>{post.data.description}</p>
+          </div>
+          <div class="post-info">
+            <span>{post.data.category}</span>
+            <span>{readingTime(post.body ?? '')} min</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section shell">
+    <div class="section-header">
+      <div>
+        <p class="section-kicker">03 / Current focus</p>
+        <h2>正在关注</h2>
+      </div>
+    </div>
+    <div class="focus-grid">
+      <article class="focus-card">
+        <span>01</span>
+        <h3>Data Infrastructure</h3>
+        <p>Catalog、开放表格式与跨系统互操作中的架构边界和工程选择。</p>
+      </article>
+      <article class="focus-card">
+        <span>02</span>
+        <h3>AI Systems</h3>
+        <p>模型推理、KV Cache 与跨模型状态复用中的效率和质量问题。</p>
+      </article>
+      <article class="focus-card">
+        <span>03</span>
+        <h3>Reproducible Research</h3>
+        <p>从论文主张到实验协议、自动化代码和可审计结果的完整路径。</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
