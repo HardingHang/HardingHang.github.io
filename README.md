@@ -41,11 +41,6 @@ src/content/blog/evaluating-open-source-catalogs.md
 - `Research`
 - `Engineering`
 
-### 新增项目
-
-在 `src/content/projects/` 新建 Markdown。项目元数据经过 schema 校验，
-内容使用普通 Markdown 编写。
-
 ### 修改个人信息
 
 - 站点标题、GitHub 地址：`src/data/site.ts`
