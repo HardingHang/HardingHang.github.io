@@ -41,6 +41,13 @@ src/content/blog/evaluating-open-source-catalogs.md
 - `Research`
 - `Engineering`
 
+### 新增项目
+
+复制 `src/content/projects/_template.md` 并将 `draft` 改为 `false`。第一个项目加入后，首页会自动出现
+“Selected work”区块，Projects 页面也会从空状态切换为项目列表。
+
+项目元数据经过 `src/content.config.ts` 中的 schema 校验，正文使用普通 Markdown。
+
 ### 修改个人信息
 
 - 站点标题、GitHub 地址：`src/data/site.ts`

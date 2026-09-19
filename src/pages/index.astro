@@ -4,6 +4,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ArrowLink from '../components/ArrowLink.astro';
 import { formatDate, readingTime } from '../utils/content';
 
+const projects = (await getCollection('projects'))
+  .filter(({ data }) => data.featured && !data.draft)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
 const posts = (await getCollection('blog'))
   .filter(({ data }) => !data.draft)
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
@@ -25,16 +30,47 @@ const posts = (await getCollection('blog'))
         也记录过程中值得复用的方法和判断。
       </p>
       <div class="hero-actions">
-        <a class="button primary" href="/blog/">Read the blog</a>
-        <a class="button" href="/about/">About me</a>
+        <a class="button primary" href="/projects/">View projects</a>
+        <a class="button" href="/blog/">Read the blog</a>
       </div>
     </div>
   </section>
 
+  {projects.length > 0 && (
+    <section class="section shell">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">01 / Selected work</p>
+          <h2>把复杂问题变成<br />可验证的工程结论</h2>
+        </div>
+        <ArrowLink href="/projects/" label="All projects" />
+      </div>
+
+      <div class="project-list">
+        {projects.map((project, index) => (
+          <a class="project-card" href={`/projects/${project.id}/`}>
+            <span class="project-number">{String(index + 1).padStart(2, '0')}</span>
+            <div class="project-main">
+              <h3>{project.data.title}</h3>
+              <p>{project.data.description}</p>
+            </div>
+            <div class="project-meta">
+              <span class="status">{project.data.status}</span>
+              <span>{project.data.eyebrow}</span>
+            </div>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 19 19 5M9 5h10v10"></path>
+            </svg>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
   <section class="section shell">
     <div class="section-header">
       <div>
-        <p class="section-kicker">01 / Latest writing</p>
+        <p class="section-kicker">{projects.length > 0 ? '02' : '01'} / Latest writing</p>
         <h2>研究笔记与工程实践</h2>
         <p>记录问题的背景、方法、证据和边界，而不只记录最后的答案。</p>
       </div>
@@ -63,7 +99,7 @@ const posts = (await getCollection('blog'))
   <section class="section shell">
     <div class="section-header">
       <div>
-        <p class="section-kicker">02 / Current focus</p>
+        <p class="section-kicker">{projects.length > 0 ? '03' : '02'} / Current focus</p>
         <h2>正在关注</h2>
       </div>
     </div>

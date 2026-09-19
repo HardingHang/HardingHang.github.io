@@ -536,6 +536,28 @@ nav a[aria-current='page']::after {
   margin-bottom: 2.5rem;
 }
 
+.empty-state {
+  min-height: 280px;
+  margin-bottom: 7rem;
+  padding: 2rem 0;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.empty-state span {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.empty-state p {
+  margin: 4.5rem 0 0;
+  font-size: 1.05rem;
+}
+
 .filter-chip {
   padding: 0.35rem 0.7rem;
   color: var(--ink-soft);
