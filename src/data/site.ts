@@ -1,6 +1,6 @@
 export const site = {
-  title: 'Hang Haitian — Research & Systems Engineer',
-  shortTitle: 'Hang Haitian',
+  title: "Hang's 个人札记",
+  shortTitle: "Hang's 个人札记",
   description:
     'Personal site of Hang Haitian — projects, essays, notes, and ongoing thoughts.',
   url: 'https://hardinghang.github.io',
