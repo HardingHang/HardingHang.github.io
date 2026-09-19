@@ -7,17 +7,17 @@ const posts = (await getCollection('blog'))
   .filter(({ data }) => !data.draft)
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
 
-const categories = ['Systems', 'AI Systems', 'Research', 'Engineering'];
+const categories = [...new Set(posts.map(({ data }) => data.category))];
 ---
 
 <BaseLayout
   title="Blog — Hang Haitian"
-  description="Writing about database systems, data infrastructure, AI systems, experiments, and engineering practice."
+  description="Essays, notes, and ongoing thoughts by Hang Haitian."
 >
   <header class="page-intro shell">
     <p class="eyebrow">Writing & notes</p>
     <h1>Blog</h1>
-    <p>关于数据库系统、数据基础设施、AI 系统、实验方法与工程实践的长期记录。</p>
+    <p>这里不预设固定主题。写下正在理解的事、尚未完成的思考，以及值得持续观察的变化。</p>
   </header>
 
   <section class="section shell" style="padding-top: 0; border-top: 0;">

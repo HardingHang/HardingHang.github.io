@@ -34,12 +34,7 @@ src/content/blog/evaluating-open-source-catalogs.md
 - `/rss.xml`；
 - Sitemap。
 
-允许的分类定义在 `src/content.config.ts`：
-
-- `Systems`
-- `AI Systems`
-- `Research`
-- `Engineering`
+`category` 使用自由文本；页面会根据已有文章自动生成分类，不需要修改代码中的枚举。
 
 ### 新增项目
 

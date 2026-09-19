@@ -3,7 +3,7 @@ title: 新文章标题
 description: 用一两句话说明文章解决的问题，以及读者能够得到什么。
 publishedAt: 2026-09-19
 updatedAt: 2026-09-19
-category: Engineering
+category: Notes
 tags:
   - Example
 draft: true

@@ -2,7 +2,7 @@ export const site = {
   title: 'Hang Haitian — Research & Systems Engineer',
   shortTitle: 'Hang Haitian',
   description:
-    'Research and engineering notes on database systems, data infrastructure, and AI systems.',
+    'Personal site of Hang Haitian — projects, essays, notes, and ongoing thoughts.',
   url: 'https://hardinghang.github.io',
   author: 'Hang Haitian',
   role: 'Research & Systems Engineer',
